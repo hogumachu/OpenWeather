@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         self.window = window
-        let mainViewModel = MainViewModel()
+        let weatherProvider = MoyaProvider<WeatherAPI>()
+        let mainViewModel = MainViewModel(weatherProvider: weatherProvider)
         let mainViewController = MainViewController(viewModel: mainViewModel)
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window.rootViewController = navigationController
