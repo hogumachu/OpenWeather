@@ -28,10 +28,10 @@ enum Weather {
             lat: String,
             lon: String,
             appId: String = APIKey.key,
-            units: String? = nil,
+            units: String? = "metric",
             mode: String? = nil,
             cnt: String? = nil,
-            lang: String? = nil
+            lang: String? = "kr" // https://openweathermap.org/forecast5#data
         ) {
             self.lat = lat
             self.lon = lon
@@ -54,6 +54,7 @@ extension Weather {
         let message: Int?
         let cnt: Int?
         let list: [ForecastDetail]?
+        let city: ForecastCity?
         
         struct ForecastDetail: Decodable {
             let dt: Int?
@@ -67,6 +68,13 @@ extension Weather {
             
 //            let rain: ForecastDetailRain?
 //            let sys: ForecastDetailSys?
+        }
+        
+        struct ForecastCity: Decodable {
+            
+            let id: Int?
+            let name: String?
+            
         }
         
         struct ForecastDetailMain: Decodable {
