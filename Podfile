@@ -11,6 +11,7 @@ target 'OpenWeather' do
   pod 'SnapKit'
   pod 'Then'
   pod 'Moya'
+  pod 'Kingfisher'
 
   # Pods for OpenWeather
 end
