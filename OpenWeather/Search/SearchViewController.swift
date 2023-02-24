@@ -11,5 +11,11 @@ import Then
 
 final class SearchViewController: UIViewController {
     
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    private let viewModel: SearchViewModel
     
 }
