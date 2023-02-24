@@ -34,6 +34,9 @@
 		F1FF1AC229A8BBD500A10EFA /* MainETCTCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC129A8BBD500A10EFA /* MainETCTCollectionTableViewCell.swift */; };
 		F1FF1AC429A8BC5900A10EFA /* MainTodayWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC329A8BC5900A10EFA /* MainTodayWeatherCollectionViewCell.swift */; };
 		F1FF1AC629A8CA1E00A10EFA /* Int+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC529A8CA1E00A10EFA /* Int+Date.swift */; };
+		F1FF1AC829A8DDA900A10EFA /* MainTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC729A8DDA900A10EFA /* MainTitleTableViewCell.swift */; };
+		F1FF1ACA29A8E2E900A10EFA /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC929A8E2E900A10EFA /* DateManager.swift */; };
+		F1FF1ACD29A8FEA300A10EFA /* MainETCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ACC29A8FEA300A10EFA /* MainETCCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		F1FF1AC129A8BBD500A10EFA /* MainETCTCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainETCTCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		F1FF1AC329A8BC5900A10EFA /* MainTodayWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodayWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1FF1AC529A8CA1E00A10EFA /* Int+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Date.swift"; sourceTree = "<group>"; };
+		F1FF1AC729A8DDA900A10EFA /* MainTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTitleTableViewCell.swift; sourceTree = "<group>"; };
+		F1FF1AC929A8E2E900A10EFA /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		F1FF1ACC29A8FEA300A10EFA /* MainETCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainETCCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 				F1FF1A7E29A89AB700A10EFA /* SceneDelegate.swift */,
 				F1FF1AA529A8A09A00A10EFA /* Network */,
 				F1FF1A9E29A8A00300A10EFA /* Extension */,
+				F1FF1ACB29A8E31F00A10EFA /* Manager */,
 				F1FF1A9029A89CF500A10EFA /* Main */,
 				F1FF1A9129A89CFB00A10EFA /* Search */,
 				F1FF1A8529A89AB800A10EFA /* Assets.xcassets */,
@@ -198,13 +205,23 @@
 			isa = PBXGroup;
 			children = (
 				F1FF1AB929A8B83700A10EFA /* MainHeaderView.swift */,
+				F1FF1AC729A8DDA900A10EFA /* MainTitleTableViewCell.swift */,
 				F1FF1ABB29A8BB4E00A10EFA /* MainTodayWeatherCollectionTableViewCell.swift */,
 				F1FF1AC329A8BC5900A10EFA /* MainTodayWeatherCollectionViewCell.swift */,
 				F1FF1ABD29A8BB7C00A10EFA /* MainWeatherTableViewCell.swift */,
 				F1FF1ABF29A8BBB300A10EFA /* MainPrecipitationTableViewCell.swift */,
 				F1FF1AC129A8BBD500A10EFA /* MainETCTCollectionTableViewCell.swift */,
+				F1FF1ACC29A8FEA300A10EFA /* MainETCCollectionViewCell.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		F1FF1ACB29A8E31F00A10EFA /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF1AC929A8E2E900A10EFA /* DateManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,12 +349,15 @@
 				F1FF1AAF29A8A63F00A10EFA /* Weather.swift in Sources */,
 				F1FF1AA729A8A0A600A10EFA /* Host.swift in Sources */,
 				F1FF1AC229A8BBD500A10EFA /* MainETCTCollectionTableViewCell.swift in Sources */,
+				F1FF1AC829A8DDA900A10EFA /* MainTitleTableViewCell.swift in Sources */,
 				F1FF1A9329A89D1000A10EFA /* MainViewController.swift in Sources */,
+				F1FF1ACD29A8FEA300A10EFA /* MainETCCollectionViewCell.swift in Sources */,
 				F1FF1AB329A8A82A00A10EFA /* MoyaProvider+.swift in Sources */,
 				F1FF1AA229A8A02300A10EFA /* UITableView+.swift in Sources */,
 				F1FF1A7D29A89AB700A10EFA /* AppDelegate.swift in Sources */,
 				F1FF1AA029A8A00B00A10EFA /* Array+.swift in Sources */,
 				F1FF1AC029A8BBB300A10EFA /* MainPrecipitationTableViewCell.swift in Sources */,
+				F1FF1ACA29A8E2E900A10EFA /* DateManager.swift in Sources */,
 				F1FF1ABC29A8BB4E00A10EFA /* MainTodayWeatherCollectionTableViewCell.swift in Sources */,
 				F1FF1A9D29A89D2900A10EFA /* SearchView.swift in Sources */,
 				F1FF1A7F29A89AB700A10EFA /* SceneDelegate.swift in Sources */,
