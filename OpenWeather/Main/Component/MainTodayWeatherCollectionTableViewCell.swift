@@ -11,7 +11,6 @@ import Then
 
 struct MainTodayWeatherCollectionTableViewCellModel {
     
-    let title: String?
     let collectionViewCellModels: [MainTodayWeatherCollectionViewCellModel]
     
 }
@@ -32,7 +31,6 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.titleLabel.text = nil
         self.items = []
         UIView.performWithoutAnimation {
             self.collectionView.reloadData()
@@ -40,8 +38,6 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
     }
     
     func configure(_ model: MainTodayWeatherCollectionTableViewCellModel) {
-        self.titleLabel.text = model.title
-        
         self.items = model.collectionViewCellModels
         
         UIView.performWithoutAnimation {
@@ -50,48 +46,16 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        self.contentView.addSubview(self.containerView)
-        self.containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        self.containerView.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(20)
-        }
-        
-        self.containerView.addSubview(self.separator)
-        self.separator.snp.makeConstraints { make in
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(5)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(1)
-        }
-        
-        self.containerView.addSubview(self.collectionView)
+        self.contentView.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.separator.snp.bottom).offset(15)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
             make.height.equalTo(self.cellSize.height)
         }
     }
     
     private func setupAttributes() {
         self.selectionStyle = .none
-        self.backgroundColor = .clear
-        
-        self.containerView.do {
-            $0.backgroundColor = .black.withAlphaComponent(0.2)
-            $0.layer.cornerRadius = 8
-        }
-        
-        self.titleLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
-        }
-        
-        self.separator.do {
-            $0.backgroundColor = .white
-        }
+        self.backgroundColor = .black.withAlphaComponent(0.2)
         
         let flowLayout = UICollectionViewFlowLayout().then {
             $0.scrollDirection = .horizontal
@@ -111,9 +75,6 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
     
     private var items: [MainTodayWeatherCollectionViewCellModel] = []
     
-    private let containerView = UIView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let separator = UIView(frame: .zero)
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewLayout()
