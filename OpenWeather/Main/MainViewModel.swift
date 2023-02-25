@@ -50,6 +50,15 @@ final class MainViewModel {
         
     }
     
+    var currentWeather: String? {
+        guard let forecast = self.currentForecast else { return nil }
+        guard let weather = forecast.weather?.first?.main else { return nil }
+        switch weather.lowercased() {
+        case "clouds", "fog", "rain", "sunny":  return weather.lowercased()
+        default:                                return "sunny"
+        }
+    }
+    
     var viewModelEvent: Observable<MainViewModelEvent> {
         self.viewModelEventRelay.asObservable()
     }
@@ -111,9 +120,14 @@ final class MainViewModel {
             return
         }
         
+        self.currentForecast = self.makeCurrentForecast(model)
         self.headerViewModel = self.makeHeaderViewModel(model)
         self.sections = self.makeSections(model)
         self.viewModelEventRelay.accept(.reloadData)
+    }
+    
+    private func makeCurrentForecast(_ model: ResponseModel?) -> ResponseModel.ForecastDetail? {
+        return model?.list?.first
     }
     
     private func makeHeaderViewModel(_ model: ResponseModel) -> MainHeaderViewModel? {
@@ -198,14 +212,21 @@ final class MainViewModel {
     }
     
     private func makeETCSection(_ model: ResponseModel) -> Section {
+        let humidity = model.list?.first?.main?.humidity ?? 0
+        let clouds = model.list?.first?.clouds?.all ?? 0
+        let gust = model.list?.first?.wind?.gust ?? 0
+        let windSpeed = model.list?.first?.wind?.speed ?? 0
+        let level = model.list?.first?.main?.grnd_level ?? 0
+        
         return .etc(.etc(.init(collectionViewCellModels: [
-            .init(title: "습도", content: "56%", description: nil),
-            .init(title: "구름", content: "50%", description: nil),
-            .init(title: "바람 속도", content: "1.97m/s", description: "강풍: 3.39m/s"),
-            .init(title: "기압", content: "1,030hpa", description: nil)
+            .init(title: "습도", content: "\(humidity)%", description: nil),
+            .init(title: "구름", content: "\(clouds)%", description: nil),
+            .init(title: "바람 속도", content: "\(gust)m/s", description: "강풍: \(windSpeed)m/s"),
+            .init(title: "기압", content: "\(level)hpa", description: nil)
         ])))
     }
     
+    private var currentForecast: ResponseModel.ForecastDetail?
     private var currentLocation = Location(lat: 36.783611, lon: 127.004173)
     private let dateManager = DateManager()
     

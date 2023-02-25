@@ -75,6 +75,10 @@ extension MainViewController: SearchViewControllerDelegate {
 
 extension MainViewController: MainViewDelegate {
     
+    var currentWeather: String? {
+        self.viewModel.currentWeather
+    }
+    
     func commonTextFieldTextFieldDidTap(_ view: CommonTextField) {
         self.viewModel.searchTextFieldDidTap()
     }
@@ -87,6 +91,15 @@ extension MainViewController: MainViewDelegate {
         guard let model = self.viewModel.headerModel(section) else { return nil }
         return MainHeaderView(frame: .zero).then {
             $0.configure(model)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let translationY = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y
+        if translationY > 0 {
+            self.mainView.showSearchView()
+        } else if translationY < 0  {
+            self.mainView.hideSearchView()
         }
     }
     
