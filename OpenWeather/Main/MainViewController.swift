@@ -45,6 +45,7 @@ final class MainViewController: UIViewController {
     private func showSearchView(_ viewModel: SearchViewModel) {
         let viewController = SearchViewController(viewModel: viewModel)
         viewController.modalPresentationStyle = .popover
+        viewController.delegate = self
         self.present(viewController, animated: true, completion: nil)
     }
     
@@ -61,6 +62,14 @@ final class MainViewController: UIViewController {
     private let mainView = MainView(frame: .zero)
     private let viewModel: MainViewModel
     private let disposeBag = DisposeBag()
+    
+}
+
+extension MainViewController: SearchViewControllerDelegate {
+    
+    func searchViewControllerDidSearch(_ viewController: SearchViewController, location: Location) {
+        self.viewModel.search(location: location)
+    }
     
 }
 
