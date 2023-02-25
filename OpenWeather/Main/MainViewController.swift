@@ -66,7 +66,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: MainViewDelegate {
     
-    func searchTextFieldDidTap(_ view: SearchTextField) {
+    func commonTextFieldTextFieldDidTap(_ view: CommonTextField) {
         self.viewModel.searchTextFieldDidTap()
     }
     

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-typealias MainViewDelegate = SearchTextFieldDelegate & UITableViewDelegate
+typealias MainViewDelegate = CommonTextFieldTextFieldDelegate & UITableViewDelegate
 typealias MainViewDataSource = UITableViewDataSource
 
 final class MainView: UIView {
@@ -66,7 +66,7 @@ final class MainView: UIView {
         }
     }
     
-    private let searchTextField = SearchTextField(frame: .zero)
+    private let searchTextField = CommonTextField(frame: .zero)
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
 }

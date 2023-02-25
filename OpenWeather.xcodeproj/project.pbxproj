@@ -43,7 +43,7 @@
 		F1FF1ADA29A9097C00A10EFA /* CityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AD929A9097C00A10EFA /* CityAPI.swift */; };
 		F1FF1ADC29A909C100A10EFA /* LocalTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ADB29A909C100A10EFA /* LocalTarget.swift */; };
 		F1FF1AE029A9BF0200A10EFA /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */; };
-		F1FF1AE429A9C3B400A10EFA /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AE329A9C3B400A10EFA /* SearchTextField.swift */; };
+		F1FF1AE429A9C3B400A10EFA /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +87,7 @@
 		F1FF1AD929A9097C00A10EFA /* CityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAPI.swift; sourceTree = "<group>"; };
 		F1FF1ADB29A909C100A10EFA /* LocalTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTarget.swift; sourceTree = "<group>"; };
 		F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
-		F1FF1AE329A9C3B400A10EFA /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,7 +280,7 @@
 		F1FF1AE229A9C3AC00A10EFA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F1FF1AE329A9C3B400A10EFA /* SearchTextField.swift */,
+				F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -423,7 +423,7 @@
 				F1FF1AA229A8A02300A10EFA /* UITableView+.swift in Sources */,
 				F1FF1A7D29A89AB700A10EFA /* AppDelegate.swift in Sources */,
 				F1FF1AA029A8A00B00A10EFA /* Array+.swift in Sources */,
-				F1FF1AE429A9C3B400A10EFA /* SearchTextField.swift in Sources */,
+				F1FF1AE429A9C3B400A10EFA /* CommonTextField.swift in Sources */,
 				F1FF1AC029A8BBB300A10EFA /* MainPrecipitationTableViewCell.swift in Sources */,
 				F1FF1ACA29A8E2E900A10EFA /* DateManager.swift in Sources */,
 				F1FF1ABC29A8BB4E00A10EFA /* MainTodayWeatherCollectionTableViewCell.swift in Sources */,
