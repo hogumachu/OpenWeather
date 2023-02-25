@@ -57,12 +57,12 @@ final class SearchTableViewCell: UITableViewCell {
         self.backgroundColor = .clear
         
         self.cityLabel.do {
-            $0.textColor = .white
+            $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 17, weight: .bold)
         }
         
         self.countryLabel.do {
-            $0.textColor = .white
+            $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 17, weight: .regular)
         }
     }

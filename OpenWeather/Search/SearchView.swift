@@ -42,7 +42,8 @@ final class SearchView: UIView {
     private func setupLayout() {
         self.addSubview(self.searchTextField)
         self.searchTextField.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(40)
         }
         
         self.addSubview(self.tableView)
@@ -53,13 +54,17 @@ final class SearchView: UIView {
     }
     
     private func setupAttributes() {
+        self.backgroundColor = .systemBlue.withAlphaComponent(0.9)
+        
         self.searchTextField.do {
             $0.isTextFieldEnabled = true
         }
         
         self.tableView.do {
-            $0.backgroundColor = .systemBlue
+            $0.backgroundColor = .clear
             $0.registerCell(cell: SearchTableViewCell.self)
+            $0.separatorColor = .secondaryColor
+            $0.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
     }
     

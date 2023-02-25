@@ -45,7 +45,7 @@ final class MainHeaderView: UIView {
         
         self.containerView.addSubview(self.labelStackView)
         self.labelStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
         }
         
         self.labelStackView.addArrangedSubview(self.cityLabel)
@@ -66,26 +66,26 @@ final class MainHeaderView: UIView {
         }
         
         self.cityLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 25, weight: .bold)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 40, weight: .regular)
             $0.textAlignment = .center
         }
         
         self.tempLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 30, weight: .heavy)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 80, weight: .semibold)
             $0.textAlignment = .center
         }
         
         self.weatherLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 20, weight: .bold)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 30, weight: .regular)
             $0.textAlignment = .center
         }
         
         self.tempDetailLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 22, weight: .regular)
             $0.textAlignment = .center
         }
     }

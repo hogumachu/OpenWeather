@@ -61,11 +61,11 @@ final class MainPrecipitationTableViewCell: UITableViewCell, MKMapViewDelegate {
     
     private func setupAttirutes() {
         self.selectionStyle = .none
-        self.backgroundColor = .black.withAlphaComponent(0.2)
+        self.backgroundColor = .contentBackgroundColor
         
         self.titleLabel.do {
             $0.text = "강수량"
-            $0.textColor = .white.withAlphaComponent(0.7)
+            $0.textColor = .secondaryColor
             $0.font = .systemFont(ofSize: 13, weight: .regular)
         }
         

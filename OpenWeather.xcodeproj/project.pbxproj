@@ -45,6 +45,7 @@
 		F1FF1AE029A9BF0200A10EFA /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */; };
 		F1FF1AE429A9C3B400A10EFA /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */; };
 		F1FF1AE829A9DD1800A10EFA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AE729A9DD1800A10EFA /* Location.swift */; };
+		F1FF1AEB29A9EF2A00A10EFA /* UIColor+DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AEA29A9EF2A00A10EFA /* UIColor+DesignSystem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		F1FF1AE729A9DD1800A10EFA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		F1FF1AEA29A9EF2A00A10EFA /* UIColor+DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DesignSystem.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				F1FF1AA329A8A03300A10EFA /* UICollectionView+.swift */,
 				F1FF1AB029A8A76000A10EFA /* Encodable+.swift */,
 				F1FF1AC529A8CA1E00A10EFA /* Int+Date.swift */,
+				F1FF1AEA29A9EF2A00A10EFA /* UIColor+DesignSystem.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				F1FF1ADC29A909C100A10EFA /* LocalTarget.swift in Sources */,
 				F1FF1AD229A9082500A10EFA /* City.swift in Sources */,
 				F1FF1ABE29A8BB7C00A10EFA /* MainWeatherTableViewCell.swift in Sources */,
+				F1FF1AEB29A9EF2A00A10EFA /* UIColor+DesignSystem.swift in Sources */,
 				F1FF1ADA29A9097C00A10EFA /* CityAPI.swift in Sources */,
 				F1FF1AA429A8A03300A10EFA /* UICollectionView+.swift in Sources */,
 				F1FF1AAF29A8A63F00A10EFA /* Weather.swift in Sources */,

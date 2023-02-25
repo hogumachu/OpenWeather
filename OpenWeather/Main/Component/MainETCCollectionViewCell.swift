@@ -71,23 +71,23 @@ final class MainETCCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .clear
         
         self.containerView.do {
-            $0.backgroundColor = .black.withAlphaComponent(0.2)
+            $0.backgroundColor = .contentBackgroundColor
             $0.layer.cornerRadius = 10
         }
         
         self.titleLabel.do {
-            $0.textColor = .white.withAlphaComponent(0.8)
+            $0.textColor = .secondaryColor
             $0.font = .systemFont(ofSize: 12, weight: .regular)
         }
         
         self.contentLabel.do {
-            $0.textColor = .white
+            $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 25, weight: .regular)
             $0.numberOfLines = 0
         }
         
         self.descriptionLabel.do {
-            $0.textColor = .white.withAlphaComponent(0.8)
+            $0.textColor = .secondaryColor
             $0.font = .systemFont(ofSize: 12, weight: .regular)
         }
     }
