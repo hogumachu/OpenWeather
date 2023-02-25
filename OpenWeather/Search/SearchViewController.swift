@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 import Then
 import RxSwift
+import RxCocoa
+import ReactorKit
+import RxDataSources
 
 protocol SearchViewControllerDelegate: AnyObject {
     
@@ -16,41 +19,61 @@ protocol SearchViewControllerDelegate: AnyObject {
     
 }
 
-final class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController, View {
     
     weak var delegate: SearchViewControllerDelegate?
     
-    init(viewModel: SearchViewModel) {
-        self.viewModel = viewModel
+    typealias Reactor = SearchViewReactor
+    
+    init(reactor: SearchViewReactor) {
+        defer { self.reactor = reactor }
         super.init(nibName: nil, bundle: nil)
-        self.setupSearchView()
-        self.bind(self.viewModel)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func bind(_ viewModel: SearchViewModel) {
-        viewModel
-            .viewModelEvent
-            .withUnretained(self)
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { viewController, event in viewController.handle(event) })
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupSearchView()
+    }
+    
+    func bind(reactor: SearchViewReactor) {
+        self.rx.viewDidLoad
+            .map { Reactor.Action.refresh }
+            .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
+        
+        self.searchView.tableView.rx
+            .setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
+        self.searchView.tableView.rx
+            .itemSelected
+            .map { Reactor.Action.itemSelectAt(indexPath: $0) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        self.searchView.searchTextField.rx.textFieldUpdateText
+            .distinctUntilChanged()
+            .throttle(.milliseconds(300), scheduler: MainScheduler.asyncInstance)
+            .map { Reactor.Action.textUpdate(keyword: $0) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        reactor.state.map { $0.currentLocation }
+        .withUnretained(self)
+        .subscribe(onNext: { viewController, location in viewController.dismissWithLocationIfEnabled(location) })
+        .disposed(by: self.disposeBag)
+        
+        reactor.state.map { $0.sections }
+        .bind(to: self.searchView.tableView.rx.items(dataSource: self.dataSource))
+        .disposed(by: self.disposeBag)
     }
     
-    private func handle(_ event: SearchViewModelEvent) {
-        switch event {
-        case .reloadData:
-            self.searchView.reloadData()
-            
-        case .dismissWithLocation(let location):
-            self.dismissWithLocation(location)
-        }
-    }
-    
-    private func dismissWithLocation(_ location: Location) {
+    private func dismissWithLocationIfEnabled(_ location: Location?) {
+        guard let location = location else { return }
         self.dismiss(animated: true) {
             self.delegate?.searchViewControllerDidSearch(self, location: location)
         }
@@ -61,43 +84,9 @@ final class SearchViewController: UIViewController {
         self.searchView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        self.searchView.delegate = self
-        self.searchView.dataSource = self
     }
     
-    private let searchView = SearchView(frame: .zero)
-    private let viewModel: SearchViewModel
-    private let disposeBag = DisposeBag()
-    
-}
-
-extension SearchViewController: SearchViewDelegate {
-    
-    func commonTextFieldTextFieldDidUpdateText(_ view: CommonTextField, text: String) {
-        self.viewModel.search(keyword: text)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.viewModel.cellDidSelect(at: indexPath)
-    }
-    
-}
-
-extension SearchViewController: SearchViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        self.viewModel.numberOfSections
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.numberOfRowsInSection(section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = self.viewModel.item(at: indexPath) else {
-            return UITableViewCell()
-        }
-        
+    private let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { _, tableView, indexPath, item in
         switch item {
         case .search(let model, _):
             guard let cell = tableView.dequeueReusableCell(cell: SearchTableViewCell.self, for: indexPath) else {
@@ -106,6 +95,11 @@ extension SearchViewController: SearchViewDataSource {
             cell.configure(model)
             return cell
         }
-    }
+    })
+    
+    private let searchView = SearchView(frame: .zero)
+    var disposeBag = DisposeBag()
     
 }
+
+extension SearchViewController: UITableViewDelegate { }
