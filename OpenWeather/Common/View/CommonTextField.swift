@@ -8,26 +8,10 @@
 import UIKit
 import SnapKit
 import Then
-
-protocol CommonTextFieldTextFieldDelegate: UITextFieldDelegate {
-    
-    func commonTextFieldTextFieldDidTap(_ view: CommonTextField)
-    func commonTextFieldTextFieldDidUpdateText(_ view: CommonTextField, text: String)
-    
-}
-
-extension CommonTextFieldTextFieldDelegate {
-    
-    func commonTextFieldTextFieldDidTap(_ view: CommonTextField) { }
-    func commonTextFieldTextFieldDidUpdateText(_ view: CommonTextField, text: String) { }
-    
-}
+import RxSwift
+import RxCocoa
 
 final class CommonTextField: UIView {
-    
-    weak var delegate: CommonTextFieldTextFieldDelegate? {
-        didSet { self.textField.delegate = self.delegate }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,20 +39,20 @@ final class CommonTextField: UIView {
     }
     
     private func setupLayout() {
-        self.addSubview(self.containerView)
-        self.containerView.snp.makeConstraints { make in
+        self.addSubview(self.containerButton)
+        self.containerButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(30)
         }
         
-        self.containerView.addSubview(self.iconImageView)
+        self.containerButton.addSubview(self.iconImageView)
         self.iconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
             make.size.equalTo(CGSize(width: 15, height: 15))
         }
         
-        self.containerView.addSubview(self.textField)
+        self.containerButton.addSubview(self.textField)
         self.textField.snp.makeConstraints { make in
             make.top.bottom.trailing.equalToSuperview()
             make.leading.equalTo(self.iconImageView.snp.trailing).offset(5)
@@ -76,12 +60,9 @@ final class CommonTextField: UIView {
     }
     
     private func setupAttributes() {
-        self.containerView.do {
+        self.containerButton.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .secondaryColor
-            $0.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerViewDidTap(_:)))
-            $0.addGestureRecognizer(tapGesture)
         }
         
         self.iconImageView.do {
@@ -90,23 +71,27 @@ final class CommonTextField: UIView {
         }
         
         self.textField.do {
-            $0.isUserInteractionEnabled = false
             $0.backgroundColor = .clear
             $0.placeholder = "Search"
-            $0.addTarget(self, action: #selector(textFieldDidChangeText(_:)), for: .editingChanged)
         }
     }
     
-    @objc private func containerViewDidTap(_ sender: UITapGestureRecognizer) {
-        self.delegate?.commonTextFieldTextFieldDidTap(self)
+    let containerButton = UIButton(frame: .zero)
+    let iconImageView = UIImageView(frame: .zero)
+    let textField = UITextField(frame: .zero)
+    
+}
+
+extension Reactive where Base: CommonTextField {
+    
+    var textFieldDidTap: ControlEvent<Void> {
+        let source = base.containerButton.rx.tap
+        return ControlEvent(events: source)
     }
     
-    @objc private func textFieldDidChangeText(_ textField: UITextField) {
-        self.delegate?.commonTextFieldTextFieldDidUpdateText(self, text: textField.text ?? "")
+    var textFieldUpdateText: ControlEvent<String?> {
+        let source = base.textField.rx.text
+        return ControlEvent(events: source)
     }
-    
-    private let containerView = UIView(frame: .zero)
-    private let iconImageView = UIImageView(frame: .zero)
-    private let textField = UITextField(frame: .zero)
     
 }
