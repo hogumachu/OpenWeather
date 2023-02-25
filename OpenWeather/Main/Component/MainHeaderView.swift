@@ -68,24 +68,28 @@ final class MainHeaderView: UIView {
         self.cityLabel.do {
             $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 40, weight: .regular)
+            $0.numberOfLines = 0
             $0.textAlignment = .center
         }
         
         self.tempLabel.do {
             $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 80, weight: .semibold)
+            $0.numberOfLines = 0
             $0.textAlignment = .center
         }
         
         self.weatherLabel.do {
             $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 30, weight: .regular)
+            $0.numberOfLines = 0
             $0.textAlignment = .center
         }
         
         self.tempDetailLabel.do {
             $0.textColor = .mainColor
             $0.font = .systemFont(ofSize: 22, weight: .regular)
+            $0.numberOfLines = 0
             $0.textAlignment = .center
         }
     }

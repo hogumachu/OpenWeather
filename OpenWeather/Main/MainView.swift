@@ -102,7 +102,7 @@ final class MainView: UIView {
             $0.registerCell(cell: MainWeatherTableViewCell.self)
             $0.registerCell(cell: MainPrecipitationTableViewCell.self)
             $0.registerCell(cell: MainETCTCollectionTableViewCell.self)
-            $0.separatorColor = .contentBackgroundColor
+            $0.separatorColor = .secondaryColor
             $0.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             $0.showsVerticalScrollIndicator = false
         }
