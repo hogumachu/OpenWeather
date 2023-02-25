@@ -13,6 +13,7 @@ import RxRelay
 enum MainViewModelEvent {
     
     case reloadData
+    case showSearchView(SearchViewModel)
     
 }
 
@@ -64,6 +65,12 @@ final class MainViewModel {
     
     func cellDidSelect(at indexPath: IndexPath) {
         
+    }
+    
+    func searchTextFieldDidTap() {
+        let cityProvider = LocalProvider<CityAPI>()
+        let searchViewModel = SearchViewModel(cityProvider: cityProvider)
+        self.viewModelEventRelay.accept(.showSearchView(searchViewModel))
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {

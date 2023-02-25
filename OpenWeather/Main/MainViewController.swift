@@ -36,7 +36,16 @@ final class MainViewController: UIViewController {
         switch event {
         case .reloadData:
             self.mainView.reloadData()
+            
+        case .showSearchView(let viewModel):
+            self.showSearchView(viewModel)
         }
+    }
+    
+    private func showSearchView(_ viewModel: SearchViewModel) {
+        let viewController = SearchViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .popover
+        self.present(viewController, animated: true, completion: nil)
     }
     
     private func setupMainView() {
@@ -55,7 +64,11 @@ final class MainViewController: UIViewController {
     
 }
 
-extension MainViewController: UITableViewDelegate {
+extension MainViewController: MainViewDelegate {
+    
+    func searchTextFieldDidTap(_ view: SearchTextField) {
+        self.viewModel.searchTextFieldDidTap()
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.viewModel.cellDidSelect(at: indexPath)
@@ -70,7 +83,7 @@ extension MainViewController: UITableViewDelegate {
     
 }
 
-extension MainViewController: UITableViewDataSource {
+extension MainViewController: MainViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         self.viewModel.numberOfSections
