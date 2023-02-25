@@ -13,6 +13,7 @@ target 'OpenWeather' do
   pod 'Moya'
   pod 'Kingfisher'
   pod 'ReactorKit'
+  pod 'RxDataSources', '~> 5.0'
 
   # Pods for OpenWeather
 end
