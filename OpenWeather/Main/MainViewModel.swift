@@ -13,6 +13,7 @@ import RxRelay
 enum MainViewModelEvent {
     
     case reloadData
+    case showSearchView(SearchViewModel)
     
 }
 
@@ -59,11 +60,17 @@ final class MainViewModel {
     
     init(weatherProvider: MoyaProvider<WeatherAPI>) {
         self.weatherProvider = weatherProvider
-        self.requestWeather(lat: self.currentLocation.lat, lon: self.currentLocation.lon)
+        self.requestWeather(location: self.currentLocation)
     }
     
     func cellDidSelect(at indexPath: IndexPath) {
         
+    }
+    
+    func searchTextFieldDidTap() {
+        let cityProvider = LocalProvider<CityAPI>()
+        let searchViewModel = SearchViewModel(cityProvider: cityProvider)
+        self.viewModelEventRelay.accept(.showSearchView(searchViewModel))
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
@@ -80,8 +87,13 @@ final class MainViewModel {
         return self.headerViewModel
     }
     
-    private func requestWeather(lat: Double, lon: Double) {
-        let requestModel = RequestModel(lat: String(lat), lon: String(lon))
+    func search(location: Location) {
+        self.currentLocation = location
+        self.requestWeather(location: location)
+    }
+    
+    private func requestWeather(location: Location) {
+        let requestModel = RequestModel(lat: String(location.lat), lon: String(location.lon))
         self.weatherProvider
             .request(.forecast(requestModel: requestModel))
             .subscribe(onSuccess: { [weak self] (model: ResponseModel?) in
@@ -194,7 +206,7 @@ final class MainViewModel {
         ])))
     }
     
-    private var currentLocation: (lat: Double, lon: Double) = (lat: 36.783611, lon: 127.004173)
+    private var currentLocation = Location(lat: 36.783611, lon: 127.004173)
     private let dateManager = DateManager()
     
     private var headerViewModel: MainHeaderViewModel?

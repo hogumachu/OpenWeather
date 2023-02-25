@@ -37,6 +37,14 @@
 		F1FF1AC829A8DDA900A10EFA /* MainTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC729A8DDA900A10EFA /* MainTitleTableViewCell.swift */; };
 		F1FF1ACA29A8E2E900A10EFA /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AC929A8E2E900A10EFA /* DateManager.swift */; };
 		F1FF1ACD29A8FEA300A10EFA /* MainETCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ACC29A8FEA300A10EFA /* MainETCCollectionViewCell.swift */; };
+		F1FF1AD029A907C000A10EFA /* citylist.json in Resources */ = {isa = PBXBuildFile; fileRef = F1FF1ACF29A907C000A10EFA /* citylist.json */; };
+		F1FF1AD229A9082500A10EFA /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AD129A9082500A10EFA /* City.swift */; };
+		F1FF1AD729A908F800A10EFA /* LocalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AD629A908F800A10EFA /* LocalProvider.swift */; };
+		F1FF1ADA29A9097C00A10EFA /* CityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AD929A9097C00A10EFA /* CityAPI.swift */; };
+		F1FF1ADC29A909C100A10EFA /* LocalTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ADB29A909C100A10EFA /* LocalTarget.swift */; };
+		F1FF1AE029A9BF0200A10EFA /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */; };
+		F1FF1AE429A9C3B400A10EFA /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */; };
+		F1FF1AE829A9DD1800A10EFA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF1AE729A9DD1800A10EFA /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +82,14 @@
 		F1FF1AC729A8DDA900A10EFA /* MainTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTitleTableViewCell.swift; sourceTree = "<group>"; };
 		F1FF1AC929A8E2E900A10EFA /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		F1FF1ACC29A8FEA300A10EFA /* MainETCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainETCCollectionViewCell.swift; sourceTree = "<group>"; };
+		F1FF1ACF29A907C000A10EFA /* citylist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = citylist.json; sourceTree = "<group>"; };
+		F1FF1AD129A9082500A10EFA /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		F1FF1AD629A908F800A10EFA /* LocalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProvider.swift; sourceTree = "<group>"; };
+		F1FF1AD929A9097C00A10EFA /* CityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAPI.swift; sourceTree = "<group>"; };
+		F1FF1ADB29A909C100A10EFA /* LocalTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTarget.swift; sourceTree = "<group>"; };
+		F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
+		F1FF1AE729A9DD1800A10EFA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,12 +144,15 @@
 			children = (
 				F1FF1A7C29A89AB700A10EFA /* AppDelegate.swift */,
 				F1FF1A7E29A89AB700A10EFA /* SceneDelegate.swift */,
+				F1FF1AD329A908E600A10EFA /* Local */,
 				F1FF1AA529A8A09A00A10EFA /* Network */,
 				F1FF1A9E29A8A00300A10EFA /* Extension */,
 				F1FF1ACB29A8E31F00A10EFA /* Manager */,
+				F1FF1AE129A9C3A300A10EFA /* Common */,
 				F1FF1A9029A89CF500A10EFA /* Main */,
 				F1FF1A9129A89CFB00A10EFA /* Search */,
 				F1FF1A8529A89AB800A10EFA /* Assets.xcassets */,
+				F1FF1ACF29A907C000A10EFA /* citylist.json */,
 				F1FF1A8729A89AB800A10EFA /* LaunchScreen.storyboard */,
 				F1FF1A8A29A89AB800A10EFA /* Info.plist */,
 			);
@@ -157,6 +176,7 @@
 				F1FF1A9829A89D2000A10EFA /* SearchViewController.swift */,
 				F1FF1A9A29A89D2500A10EFA /* SearchViewModel.swift */,
 				F1FF1A9C29A89D2900A10EFA /* SearchView.swift */,
+				F1FF1ADF29A9BF0200A10EFA /* SearchTableViewCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -224,6 +244,50 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		F1FF1AD329A908E600A10EFA /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF1AD629A908F800A10EFA /* LocalProvider.swift */,
+				F1FF1ADB29A909C100A10EFA /* LocalTarget.swift */,
+				F1FF1AD829A9097100A10EFA /* API */,
+				F1FF1AD429A908EA00A10EFA /* Model */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		F1FF1AD429A908EA00A10EFA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF1AD129A9082500A10EFA /* City.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F1FF1AD829A9097100A10EFA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF1AD929A9097C00A10EFA /* CityAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F1FF1AE129A9C3A300A10EFA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF1AE729A9DD1800A10EFA /* Location.swift */,
+				F1FF1AE229A9C3AC00A10EFA /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F1FF1AE229A9C3AC00A10EFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF1AE329A9C3B400A10EFA /* CommonTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,6 +350,7 @@
 			files = (
 				F1FF1A8929A89AB800A10EFA /* LaunchScreen.storyboard in Resources */,
 				F1FF1A8629A89AB800A10EFA /* Assets.xcassets in Resources */,
+				F1FF1AD029A907C000A10EFA /* citylist.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,14 +404,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1FF1A9929A89D2000A10EFA /* SearchViewController.swift in Sources */,
+				F1FF1AD729A908F800A10EFA /* LocalProvider.swift in Sources */,
 				F1FF1AAC29A8A23D00A10EFA /* WeatherAPI.swift in Sources */,
 				F1FF1A9B29A89D2500A10EFA /* SearchViewModel.swift in Sources */,
 				F1FF1AB129A8A76000A10EFA /* Encodable+.swift in Sources */,
 				F1FF1ABA29A8B83700A10EFA /* MainHeaderView.swift in Sources */,
 				F1FF1AC629A8CA1E00A10EFA /* Int+Date.swift in Sources */,
+				F1FF1ADC29A909C100A10EFA /* LocalTarget.swift in Sources */,
+				F1FF1AD229A9082500A10EFA /* City.swift in Sources */,
 				F1FF1ABE29A8BB7C00A10EFA /* MainWeatherTableViewCell.swift in Sources */,
+				F1FF1ADA29A9097C00A10EFA /* CityAPI.swift in Sources */,
 				F1FF1AA429A8A03300A10EFA /* UICollectionView+.swift in Sources */,
 				F1FF1AAF29A8A63F00A10EFA /* Weather.swift in Sources */,
+				F1FF1AE029A9BF0200A10EFA /* SearchTableViewCell.swift in Sources */,
 				F1FF1AA729A8A0A600A10EFA /* Host.swift in Sources */,
 				F1FF1AC229A8BBD500A10EFA /* MainETCTCollectionTableViewCell.swift in Sources */,
 				F1FF1AC829A8DDA900A10EFA /* MainTitleTableViewCell.swift in Sources */,
@@ -355,7 +425,9 @@
 				F1FF1AB329A8A82A00A10EFA /* MoyaProvider+.swift in Sources */,
 				F1FF1AA229A8A02300A10EFA /* UITableView+.swift in Sources */,
 				F1FF1A7D29A89AB700A10EFA /* AppDelegate.swift in Sources */,
+				F1FF1AE829A9DD1800A10EFA /* Location.swift in Sources */,
 				F1FF1AA029A8A00B00A10EFA /* Array+.swift in Sources */,
+				F1FF1AE429A9C3B400A10EFA /* CommonTextField.swift in Sources */,
 				F1FF1AC029A8BBB300A10EFA /* MainPrecipitationTableViewCell.swift in Sources */,
 				F1FF1ACA29A8E2E900A10EFA /* DateManager.swift in Sources */,
 				F1FF1ABC29A8BB4E00A10EFA /* MainTodayWeatherCollectionTableViewCell.swift in Sources */,

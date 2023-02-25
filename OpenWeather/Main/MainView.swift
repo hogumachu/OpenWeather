@@ -9,13 +9,19 @@ import UIKit
 import SnapKit
 import Then
 
+typealias MainViewDelegate = CommonTextFieldTextFieldDelegate & UITableViewDelegate
+typealias MainViewDataSource = UITableViewDataSource
+
 final class MainView: UIView {
     
-    weak var delegate: UITableViewDelegate? {
-        didSet { self.tableView.delegate = self.delegate }
+    weak var delegate: MainViewDelegate? {
+        didSet {
+            self.searchTextField.delegate = self.delegate
+            self.tableView.delegate = self.delegate
+        }
     }
     
-    weak var dataSource: UITableViewDataSource? {
+    weak var dataSource: MainViewDataSource? {
         didSet { self.tableView.dataSource = self.dataSource }
     }
     
@@ -34,9 +40,15 @@ final class MainView: UIView {
     }
     
     private func setupLayout() {
+        self.addSubview(self.searchTextField)
+        self.searchTextField.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+        
         self.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(self.searchTextField.snp.bottom).offset(3)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -54,6 +66,7 @@ final class MainView: UIView {
         }
     }
     
+    private let searchTextField = CommonTextField(frame: .zero)
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
 }
