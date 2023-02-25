@@ -58,12 +58,14 @@ final class CommonTextField: UIView {
         self.addSubview(self.containerView)
         self.containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            make.height.equalTo(30)
         }
         
         self.containerView.addSubview(self.iconImageView)
         self.iconImageView.snp.makeConstraints { make in
-            make.top.bottom.leading.equalToSuperview().inset(10)
-            make.size.equalTo(CGSize(width: 20, height: 20))
+            make.leading.equalToSuperview().inset(10)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(CGSize(width: 15, height: 15))
         }
         
         self.containerView.addSubview(self.textField)
@@ -76,7 +78,7 @@ final class CommonTextField: UIView {
     private func setupAttributes() {
         self.containerView.do {
             $0.layer.cornerRadius = 8
-            $0.backgroundColor = .lightGray
+            $0.backgroundColor = .secondaryColor
             $0.isUserInteractionEnabled = true
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerViewDidTap(_:)))
             $0.addGestureRecognizer(tapGesture)
@@ -84,7 +86,7 @@ final class CommonTextField: UIView {
         
         self.iconImageView.do {
             $0.image = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
-            $0.tintColor = .systemGray
+            $0.tintColor = .darkGray
         }
         
         self.textField.do {

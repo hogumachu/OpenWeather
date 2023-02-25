@@ -55,7 +55,7 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
     
     private func setupAttributes() {
         self.selectionStyle = .none
-        self.backgroundColor = .black.withAlphaComponent(0.2)
+        self.backgroundColor = .contentBackgroundColor
         
         let flowLayout = UICollectionViewFlowLayout().then {
             $0.scrollDirection = .horizontal
@@ -69,7 +69,7 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
             $0.backgroundColor = .clear
             $0.collectionViewLayout = flowLayout
             $0.showsHorizontalScrollIndicator = false
-            $0.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            $0.contentInset = .zero
         }
     }
     
@@ -80,8 +80,7 @@ final class MainTodayWeatherCollectionTableViewCell: UITableViewCell {
         collectionViewLayout: UICollectionViewLayout()
     )
     
-    // TODO: - Change
-    private let cellSize = CGSize(width: 80, height: 100)
+    private let cellSize = CGSize(width: 70, height: 80)
     
 }
 

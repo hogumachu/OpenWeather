@@ -21,8 +21,8 @@ struct MainTitleTableViewCellModel {
         
         var textColor: UIColor {
             switch self {
-            case .normal:       return .white
-            case .secondary:    return .white.withAlphaComponent(0.7)
+            case .normal:       return .mainColor
+            case .secondary:    return .secondaryColor
             }
         }
     }
@@ -59,11 +59,11 @@ final class MainTitleTableViewCell: UITableViewCell {
     
     private func setupAttributes() {
         self.selectionStyle = .none
-        self.backgroundColor = .black.withAlphaComponent(0.2)
+        self.backgroundColor = .contentBackgroundColor
         
         self.titleLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 13, weight: .regular)
         }
     }
     

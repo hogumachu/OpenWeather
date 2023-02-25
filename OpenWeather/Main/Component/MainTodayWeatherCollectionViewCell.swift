@@ -64,8 +64,8 @@ final class MainTodayWeatherCollectionViewCell: UICollectionViewCell {
     
     private func setupAttirubtes() {
         self.timeLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.textAlignment = .center
         }
         
@@ -74,8 +74,8 @@ final class MainTodayWeatherCollectionViewCell: UICollectionViewCell {
         }
         
         self.tempLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.textAlignment = .center
         }
     }

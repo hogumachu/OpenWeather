@@ -66,11 +66,11 @@ final class MainWeatherTableViewCell: UITableViewCell {
     
     private func setupAttributes() {
         self.selectionStyle = .none
-        self.backgroundColor = .black.withAlphaComponent(0.2)
+        self.backgroundColor = .contentBackgroundColor
         
         self.dayOfWeekLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 15, weight: .regular)
         }
         
         self.iconImageView.do {
@@ -78,8 +78,8 @@ final class MainWeatherTableViewCell: UITableViewCell {
         }
         
         self.tempLabel.do {
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.textColor = .mainColor
+            $0.font = .systemFont(ofSize: 15, weight: .regular)
         }
     }
     
