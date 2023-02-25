@@ -10,7 +10,15 @@ import SnapKit
 import Then
 import RxSwift
 
+protocol SearchViewControllerDelegate: AnyObject {
+    
+    func searchViewControllerDidSearch(_ viewController: SearchViewController, location: Location)
+    
+}
+
 final class SearchViewController: UIViewController {
+    
+    weak var delegate: SearchViewControllerDelegate?
     
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -36,6 +44,15 @@ final class SearchViewController: UIViewController {
         switch event {
         case .reloadData:
             self.searchView.reloadData()
+            
+        case .dismissWithLocation(let location):
+            self.dismissWithLocation(location)
+        }
+    }
+    
+    private func dismissWithLocation(_ location: Location) {
+        self.dismiss(animated: true) {
+            self.delegate?.searchViewControllerDidSearch(self, location: location)
         }
     }
     
@@ -82,7 +99,7 @@ extension SearchViewController: SearchViewDataSource {
         }
         
         switch item {
-        case .search(let model):
+        case .search(let model, _):
             guard let cell = tableView.dequeueReusableCell(cell: SearchTableViewCell.self, for: indexPath) else {
                 return UITableViewCell()
             }

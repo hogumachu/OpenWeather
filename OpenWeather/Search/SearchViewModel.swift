@@ -12,6 +12,7 @@ import RxRelay
 enum SearchViewModelEvent {
     
     case reloadData
+    case dismissWithLocation(Location)
     
 }
 
@@ -32,7 +33,7 @@ final class SearchViewModel {
     
     enum Item {
         
-        case search(SearchTableViewCellModel)
+        case search(SearchTableViewCellModel, Location)
         
     }
     
@@ -55,7 +56,12 @@ final class SearchViewModel {
     }
     
     func cellDidSelect(at indexPath: IndexPath) {
-        
+        guard let section = self.sections[safe: indexPath.section] else { return }
+        guard let item = section.items[safe: indexPath.row] else { return }
+        switch item {
+        case .search(_, let location):
+            self.viewModelEventRelay.accept(.dismissWithLocation(location))
+        }
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
@@ -83,8 +89,11 @@ final class SearchViewModel {
     
     private func makeDefaultSections(_ model: ResponseModel) -> [Section] {
         let items = model
-            .map { item -> Item in
-                return .search(.init(city: item.name ?? "", country: item.country ?? ""))
+            .compactMap { item -> Item? in
+                guard let lat = item.coord?.lat, let lon = item.coord?.lon else { return nil }
+                let city = item.name ?? ""
+                let country = item.country ?? ""
+                return .search(.init(city: city, country: country), .init(lat: lat, lon: lon))
             }
         return [.search(items)]
     }
@@ -93,7 +102,10 @@ final class SearchViewModel {
         let items = model
             .compactMap { item -> Item? in
                 guard item.name?.contains(keyword) == true else { return nil }
-                return .search(.init(city: item.name ?? "", country: item.country ?? ""))
+                guard let lat = item.coord?.lat, let lon = item.coord?.lon else { return nil }
+                let city = item.name ?? ""
+                let country = item.country ?? ""
+                return .search(.init(city: city, country: country), .init(lat: lat, lon: lon))
             }
         return [.search(items)]
     }
