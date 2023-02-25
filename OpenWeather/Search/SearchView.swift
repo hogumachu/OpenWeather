@@ -54,7 +54,7 @@ final class SearchView: UIView {
     }
     
     private func setupAttributes() {
-        self.backgroundColor = .systemBlue.withAlphaComponent(0.9)
+        self.backgroundColor = .black.withAlphaComponent(0.8)
         
         self.searchTextField.do {
             $0.isTextFieldEnabled = true
