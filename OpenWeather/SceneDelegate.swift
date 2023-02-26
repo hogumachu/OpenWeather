@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         self.window = window
         let weatherProvider = MoyaProvider<WeatherAPI>()
-        let mainViewModel = MainViewModel(weatherProvider: weatherProvider)
-        let mainViewController = MainViewController(viewModel: mainViewModel)
+        let mainViewReactor = MainViewReactor(weatherProvider: weatherProvider)
+        let mainViewController = MainViewController(reactor: mainViewReactor)
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.isNavigationBarHidden = true
         window.rootViewController = navigationController

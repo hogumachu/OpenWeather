@@ -9,27 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-protocol MainViewDelegate: CommonTextFieldTextFieldDelegate & UITableViewDelegate {
-    
-    var currentWeather: String? { get }
-    
-}
-
-typealias MainViewDataSource = UITableViewDataSource
-
 final class MainView: UIView {
-    
-    weak var delegate: MainViewDelegate? {
-        didSet {
-            self.searchTextField.delegate = self.delegate
-            self.tableView.delegate = self.delegate
-            self.updateBackground()
-        }
-    }
-    
-    weak var dataSource: MainViewDataSource? {
-        didSet { self.tableView.dataSource = self.dataSource }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,12 +21,9 @@ final class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadData() {
-        self.tableView.reloadData()
-        self.updateBackground()
-    }
-    
     func showSearchView() {
+        guard self.isSearchTextFieldHidden == true else { return }
+        self.isSearchTextFieldHidden = false
         self.searchTextFieldTopConstraint?.update(offset: 40)
         
         UIView.animate(withDuration: 0.3) {
@@ -55,6 +32,8 @@ final class MainView: UIView {
     }
     
     func hideSearchView() {
+        guard self.isSearchTextFieldHidden == false else { return }
+        self.isSearchTextFieldHidden = true
         self.searchTextFieldTopConstraint?.update(offset: -40)
         
         UIView.animate(withDuration: 0.3) {
@@ -62,8 +41,8 @@ final class MainView: UIView {
         }
     }
     
-    private func updateBackground() {
-        guard let named = self.delegate?.currentWeather else { return }
+    func updateCurrentWeather(weather: String?) {
+        guard let named = weather else { return }
         self.backgroundImageView.image = UIImage(named: named)
     }
     
@@ -95,8 +74,13 @@ final class MainView: UIView {
             $0.contentMode = .scaleAspectFill
         }
         
+        self.searchTextField.do {
+            $0.isTextFieldEnabled = false
+        }
+        
         self.tableView.do {
             $0.backgroundColor = .clear
+            $0.registerCell(cell: MainHeaderTableViewCell.self)
             $0.registerCell(cell: MainTitleTableViewCell.self)
             $0.registerCell(cell: MainTodayWeatherCollectionTableViewCell.self)
             $0.registerCell(cell: MainWeatherTableViewCell.self)
@@ -108,10 +92,11 @@ final class MainView: UIView {
         }
     }
     
+    private var isSearchTextFieldHidden = false
     private var searchTextFieldTopConstraint: Constraint?
     
-    private let backgroundImageView = UIImageView(frame: .zero)
-    private let searchTextField = CommonTextField(frame: .zero)
-    private let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    let backgroundImageView = UIImageView(frame: .zero)
+    let searchTextField = CommonTextField(frame: .zero)
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
 }
