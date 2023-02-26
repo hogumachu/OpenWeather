@@ -40,17 +40,13 @@ final class SearchViewController: UIViewController, View {
     }
     
     func bind(reactor: SearchViewReactor) {
+        // Action
         self.rx.viewDidLoad
             .map { Reactor.Action.refresh }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
-        self.searchView.tableView.rx
-            .setDelegate(self)
-            .disposed(by: self.disposeBag)
-        
-        self.searchView.tableView.rx
-            .itemSelected
+        self.searchView.tableView.rx.itemSelected
             .map { Reactor.Action.itemSelectAt(indexPath: $0) }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
@@ -62,6 +58,7 @@ final class SearchViewController: UIViewController, View {
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
+        // State
         reactor.state.map { $0.currentLocation }
         .withUnretained(self)
         .subscribe(onNext: { viewController, location in viewController.dismissWithLocationIfEnabled(location) })
@@ -70,6 +67,10 @@ final class SearchViewController: UIViewController, View {
         reactor.state.map { $0.sections }
         .bind(to: self.searchView.tableView.rx.items(dataSource: self.dataSource))
         .disposed(by: self.disposeBag)
+        
+        // View
+        self.searchView.tableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
     }
     
     private func dismissWithLocationIfEnabled(_ location: Location?) {

@@ -21,10 +21,6 @@ final class SearchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadData() {
-        self.tableView.reloadData()
-    }
-    
     private func setupLayout() {
         self.addSubview(self.searchTextField)
         self.searchTextField.snp.makeConstraints { make in

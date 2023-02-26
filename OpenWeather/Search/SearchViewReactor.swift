@@ -39,12 +39,6 @@ final class SearchViewReactor: Reactor {
     
     let initialState: State = State(origin: [], sections: [], currentLocation: nil)
     
-    enum Item {
-        
-        case search(SearchTableViewCellModel, Location)
-        
-    }
-    
     init(cityProvider: LocalProvider<CityAPI>) {
         self.cityProvider = cityProvider
     }
@@ -70,6 +64,7 @@ final class SearchViewReactor: Reactor {
         switch mutation {
         case .reloadData:
             if let model = self.requestCityList() {
+                newState.origin = model
                 newState.sections = self.makeDefaultSections(model)
             }
             
@@ -81,16 +76,27 @@ final class SearchViewReactor: Reactor {
                 switch item {
                 case .search(_, let location):
                     newState.currentLocation = location
+                    LocationManager.shared.currentLocation.onNext(location)
                 }
             }
         }
-        return state
+        
+        return newState
     }
     
     private func requestCityList() -> ResponseModel? {
         let model: ResponseModel? = self.cityProvider.load(.list)
         return model
     }
+    
+    private let cityProvider: LocalProvider<CityAPI>
+    private let disposeBag = DisposeBag()
+    
+}
+
+extension SearchViewReactor {
+    
+    // MARK: - Generate Sections
     
     private func makeDefaultSections(_ model: ResponseModel) -> [SearchSection] {
         let items = model
@@ -102,7 +108,7 @@ final class SearchViewReactor: Reactor {
             }
         return [.init(items: items)]
     }
-
+    
     private func makeSections(_ model: ResponseModel, keyword: String) -> [SearchSection] {
         let items = model
             .compactMap { item -> SearchItem? in
@@ -114,8 +120,5 @@ final class SearchViewReactor: Reactor {
             }
         return [.init(items: items)]
     }
-    
-    private let cityProvider: LocalProvider<CityAPI>
-    private let disposeBag = DisposeBag()
     
 }
