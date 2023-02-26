@@ -1,5 +1,5 @@
 //
-//  MainHeaderView.swift
+//  MainHeaderTableViewCell.swift
 //  OpenWeather
 //
 //  Created by 홍성준 on 2023/02/24.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-struct MainHeaderViewModel {
+struct MainHeaderTableViewCellModel {
     
     let city: String?
     let temp: String?
@@ -18,10 +18,10 @@ struct MainHeaderViewModel {
     
 }
 
-final class MainHeaderView: UIView {
+final class MainHeaderTableViewCell: UITableViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupLayout()
         self.setupAttributes()
     }
@@ -30,7 +30,7 @@ final class MainHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(_ model: MainHeaderViewModel) {
+    func configure(_ model: MainHeaderTableViewCellModel) {
         self.cityLabel.text = model.city
         self.tempLabel.text = model.temp
         self.weatherLabel.text = model.weather
@@ -38,14 +38,14 @@ final class MainHeaderView: UIView {
     }
     
     private func setupLayout() {
-        self.addSubview(self.containerView)
+        self.contentView.addSubview(self.containerView)
         self.containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
         self.containerView.addSubview(self.labelStackView)
         self.labelStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
         }
         
         self.labelStackView.addArrangedSubview(self.cityLabel)
@@ -55,6 +55,8 @@ final class MainHeaderView: UIView {
     }
     
     private func setupAttributes() {
+        self.backgroundColor = .clear
+        
         self.containerView.do {
             $0.backgroundColor = .clear
         }
