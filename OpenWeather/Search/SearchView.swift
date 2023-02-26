@@ -9,21 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-typealias SearchViewDelegate = CommonTextFieldTextFieldDelegate & UITableViewDelegate
-typealias SearchViewDataSource = UITableViewDataSource
-
 final class SearchView: UIView {
-    
-    weak var delegate: SearchViewDelegate? {
-        didSet {
-            self.searchTextField.delegate = self.delegate
-            self.tableView.delegate = self.delegate
-        }
-    }
-    
-    weak var dataSource: SearchViewDataSource? {
-        didSet { self.tableView.dataSource = self.dataSource }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,10 +19,6 @@ final class SearchView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func reloadData() {
-        self.tableView.reloadData()
     }
     
     private func setupLayout() {
@@ -68,7 +50,7 @@ final class SearchView: UIView {
         }
     }
     
-    private let searchTextField = CommonTextField(frame: .zero)
-    private let tableView = UITableView(frame: .zero, style: .grouped)
+    let searchTextField = CommonTextField(frame: .zero)
+    let tableView = UITableView(frame: .zero, style: .grouped)
     
 }
