@@ -114,14 +114,6 @@ extension Weather {
             
         }
         
-//        struct ForecastDetailRain: Decodable {
-//            let 3h: Double?
-//        }
-//
-//        struct ForecastDetailSys: Decodable {
-//            let pod: String?
-//        }
-        
     }
     
 }
